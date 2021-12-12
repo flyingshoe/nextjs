@@ -45,6 +45,7 @@ const PaginationBar = ({
             onChange={(pageNo, pageSize) =>
               setPagination((oldData) => ({ ...oldData, pageNo, pageSize }))
             }
+            current={pagination.pageNo}
             size="small"
             total={totalCount}
             showSizeChanger
