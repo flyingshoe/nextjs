@@ -65,7 +65,7 @@ export default function MoviesGallery() {
             }}
           >
             {movies.map((movie) => (
-              <MovieCard data={movie} loading={loading} />
+              <MovieCard key={movie._id} data={movie} loading={loading} />
             ))}
           </div>
         </Skeleton>
