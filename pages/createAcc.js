@@ -46,7 +46,7 @@ const Form = ({ children, getData }) => {
 const FormItem = ({ label, name, value }) => {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-      <label for={name}>{label}:</label>
+      <label htmlFor={name}>{label}:</label>
       <input name={name} type="text" />
     </div>
   );
