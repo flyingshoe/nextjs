@@ -1,10 +1,8 @@
 import { connectToDatabase } from "../../utils/connectDB";
 
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
 export default async function handler(req, res) {
   let q = req.query;
-  //console.log(q,parseInt(q.pageNo) - 1 * parseInt(q.pageSize));
+
   const { db } = await connectToDatabase();
   const movies = await db
     .collection("movies")
