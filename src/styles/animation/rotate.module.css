@@ -1,0 +1,23 @@
+/* Rotate Enter */
+.enter {
+  transform: rotate(0deg);
+}
+.enter-active,
+.enter-done {
+  transform: rotate(45deg);
+}
+.enter-active {
+  transition: all 0.4s !important;
+}
+
+/* Rotate Exit */
+.exit {
+  transform: rotate(45deg);
+}
+.exit-active,
+.exit-done {
+  transform: rotate(0deg);
+}
+.exit-active {
+  transition: all 0.4s !important;
+}
