@@ -38,7 +38,10 @@ export default function Navbar() {
   return (
     <AppBar
       position="sticky"
-      // style={{ backgroundColor: "rgba(255,255,255,0.8)", backdropFilter: "blur(8px)" }}
+      style={{
+        backgroundColor: "rgba(255,255,255,0.8)",
+        backdropFilter: "blur(4px)",
+      }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -50,7 +53,7 @@ export default function Navbar() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={toggleDrawer}
-              color="inherit"
+              color="#555"
             >
               <MenuIcon />
             </IconButton>
@@ -79,6 +82,7 @@ export default function Navbar() {
                     justifyContent: "center",
                     gap: 1,
                     py: 2,
+                    color: "#555",
                   }}
                   component={Link}
                   href="/"
@@ -100,7 +104,9 @@ export default function Navbar() {
                           : "m-nav-item"
                       }
                     >
-                      <ListItemButton sx={{ textAlign: "center" }}>
+                      <ListItemButton
+                        sx={{ textAlign: "center", color: "#555" }}
+                      >
                         <ListItemText primary={item.title} href={item.path} />
                       </ListItemButton>
                     </ListItem>
@@ -121,7 +127,7 @@ export default function Navbar() {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "#555",
               textDecoration: "none",
             }}
           >
@@ -140,7 +146,7 @@ export default function Navbar() {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "#555",
               textDecoration: "none",
             }}
           >
@@ -152,9 +158,9 @@ export default function Navbar() {
             {navItems.map((item) => (
               <Button
                 key={item.title}
-                href={item.path}
                 component={Link}
-                sx={{ my: 2, color: "white", display: "block" }}
+                href={item.path}
+                sx={{ my: 2, color: "#555", display: "block" }}
                 className={
                   router.pathname === item.path ? "nav-item-active" : "nav-item"
                 }
