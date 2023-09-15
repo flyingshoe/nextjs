@@ -76,18 +76,23 @@ export default function JobSearch() {
     }
   };
 
+  const RenderCards = () => {
+    if (loading) {
+      return <JobCardSkeleton />;
+    }
+    return (
+      <>
+        {data.map((item) => (
+          <JobCard key={item.uuid} cardData={item} />
+        ))}
+      </>
+    );
+  };
+
   return (
     <Box className="bg-gray-100">
       <Container maxWidth="sm" className="flex flex-col gap-8 p-8">
-        {loading ? (
-          <JobCardSkeleton />
-        ) : (
-          <>
-            {data.map((item) => (
-              <JobCard key={item.uuid} cardData={item} />
-            ))}
-          </>
-        )}
+        <RenderCards />
       </Container>
 
       <JobModalWrapper
