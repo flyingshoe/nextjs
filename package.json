@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@googlemaps/react-wrapper": "^1.1.35",
     "@mui/icons-material": "^5.10.14",
     "@mui/material": "^5.10.13",
     "@types/node": "20.5.8",
@@ -28,5 +29,8 @@
     "sharp": "^0.32.5",
     "tailwindcss": "3.3.3",
     "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "@types/google.maps": "^3.54.0"
   }
 }
