@@ -52,6 +52,9 @@ export default function JobCard({ cardData: data }) {
           }
           title={data.postedCompany.name}
           subheader={data.title}
+          classes={{
+            root: "[overflow-wrap:anywhere]",
+          }}
         ></CardHeader>
         <CardContent>
           <h2>
