@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: NextLayout) {
   return (
     <html lang="en">
+      <meta name="theme-color" content="#FFF" />
       <link rel="manifest" href="/manifest.json" />
       <body /* className={selectedFont.className} */>
         <Navbar />
