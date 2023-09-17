@@ -9,7 +9,7 @@ export default function Home() {
       {navItems.map(({ title, path, desc }) => (
         <Card
           key={path}
-          sx={{ maxWidth: 350 }}
+          className="max-w-sm"
           component={Link}
           href={path}
           variant="outlined"
