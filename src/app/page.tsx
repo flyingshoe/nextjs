@@ -5,11 +5,11 @@ import Typography from "@mui/material/Typography";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between sm:py-20 sm:px-8 py-8 px-4">
       {navItems.map(({ title, path, desc }) => (
         <Card
           key={path}
-          sx={{ maxWidth: 345 }}
+          sx={{ maxWidth: 350 }}
           component={Link}
           href={path}
           variant="outlined"
