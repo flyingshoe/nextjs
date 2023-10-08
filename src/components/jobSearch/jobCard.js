@@ -7,21 +7,12 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import { addComma } from "../../utils";
-import { isToday, parse } from "date-fns";
 
 const iconSize = 70;
 
 export default function JobCard({ cardData: data }) {
   return (
-    <Card
-      style={
-        isToday(parse(data.metadata.newPostingDate, "yyyy-MM-dd", new Date()))
-          ? {
-              boxShadow: "0 0 8px #F50",
-            }
-          : {}
-      }
-    >
+    <Card {...(data.showShadow && { style: { boxShadow: "0 0 8px #F50" } })}>
       <CardActionArea
         component="a"
         target="_blank"

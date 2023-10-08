@@ -7,11 +7,13 @@ import JobModalWrapper from "@/components/jobSearch/jobModalWrapper";
 import useUserJobs from "@/hooks/jobSearch/useUserJobs";
 import { useEffect, useState } from "react";
 import JobCardSkeleton from "@/components/jobSearch/jobCardSkeleton";
+import { isToday, parse } from "date-fns";
 
 const { MCF_BASE_URL } = endpoints;
 
 export default function JobSearch() {
-  const { jobQuery, setJobQuery, baseParam, baseData } = useUserJobs();
+  const { jobQuery, setJobQuery, baseParam, baseData, setLastSeen } =
+    useUserJobs();
   const [data, setData] = useState<JobData[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -68,6 +70,36 @@ export default function JobSearch() {
 
       // Sort according to Unix timestamp
       allData.sort((a, b) => b.unix - a.unix);
+
+      // Set box shadow
+      // First check if there is a lastSeen post stored in localstorage
+      // AND there is the same lastSeen post in the job listing (allData)
+      // If so set the box shadow for every post UNTIL the last seen post
+      if (
+        jobQuery.lastSeen &&
+        allData.findIndex((p) => p.uuid === jobQuery.lastSeen) !== -1
+      ) {
+        const lastSeenIdx = allData.findIndex(
+          (post) => post.uuid === jobQuery.lastSeen
+        );
+        allData = allData.map((post, idx) => ({
+          ...post,
+          showShadow: idx < lastSeenIdx,
+        }));
+      }
+
+      // If not, just set the box shadow for today's posts
+      else {
+        allData = allData.map((post) => ({
+          ...post,
+          showShadow: isToday(
+            parse(post.metadata.newPostingDate, "yyyy-MM-dd", new Date())
+          ),
+        }));
+      }
+
+      // Save to localstorage: UUID of first post as the lastSeen post
+      setLastSeen(allData[0].uuid);
 
       // Save data
       setData(allData);

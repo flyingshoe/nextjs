@@ -20,5 +20,9 @@ export default function useUserJobs() {
     localStorage.setItem(lsKey, JSON.stringify(jobQuery));
   }, [jobQuery]);
 
-  return { jobQuery, setJobQuery, baseParam, baseData };
+  const setLastSeen = (lastSeen) => {
+    localStorage.setItem(lsKey, JSON.stringify({ ...jobQuery, lastSeen }));
+  };
+
+  return { jobQuery, setJobQuery, baseParam, baseData, setLastSeen };
 }
