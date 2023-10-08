@@ -76,14 +76,9 @@ export default function JobSearch() {
       // AND there is the same lastSeen post in the job listing (allData)
       // If so set the box shadow for every post UNTIL the last seen post
 
-      const lastSeen = JSON.parse(window.localStorage[jobLsKey])?.lastSeen // Check local storage instead of jobQuery as setting lastSeen does not trigger setJobQuery in order to prevent refetching
-      if (
-        lastSeen &&
-        allData.findIndex((p) => p.uuid === lastSeen) !== -1
-      ) {
-        const lastSeenIdx = allData.findIndex(
-          (post) => post.uuid === lastSeen
-        );
+      const lastSeen = JSON.parse(window.localStorage[jobLsKey])?.lastSeen; // Check local storage instead of jobQuery as setting lastSeen does not trigger setJobQuery in order to prevent refetching
+      const lastSeenIdx = allData.findIndex((post) => post.uuid === lastSeen);
+      if (lastSeen && lastSeenIdx !== -1) {
         allData = allData.map((post, idx) => ({
           ...post,
           showShadow: idx < lastSeenIdx,
@@ -130,7 +125,7 @@ export default function JobSearch() {
       </Container>
 
       <JobModalWrapper
-        callback={getJobs}
+        fetchJobs={getJobs}
         jobQuery={jobQuery}
         setJobQuery={setJobQuery}
       />

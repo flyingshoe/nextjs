@@ -5,14 +5,14 @@ import FabWrapper from "../FabWrapper";
 import JobModal from "./jobModal";
 import { useRef } from "react";
 
-export default function JobModalWrapper({ callback, jobQuery, setJobQuery }) {
+export default function JobModalWrapper({ fetchJobs, jobQuery, setJobQuery }) {
   const modalRef = useRef(null);
 
   return (
     <>
       <FabWrapper>
         <Edit onClick={() => modalRef.current.handleOpen()} />
-        <Refresh onClick={callback} />
+        <Refresh onClick={fetchJobs} />
       </FabWrapper>
       <JobModal ref={modalRef} jobQuery={jobQuery} setJobQuery={setJobQuery} />
     </>
