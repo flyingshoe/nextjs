@@ -5,7 +5,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { forwardRef, useImperativeHandle, useState } from "react";
-import { Add, Close, Delete, Save } from "@mui/icons-material";
+import { Add, Cancel, Close, Save } from "@mui/icons-material";
 import {
   Checkbox,
   IconButton,
@@ -73,10 +73,10 @@ function JobModal({ jobQuery, setJobQuery }, ref) {
       >
         <Close />
       </IconButton>
-      <DialogContent>
+      <DialogContent className="max-sm:px-1">
         <List>
           <ListItem>
-            <ListItemText style={{ marginLeft: 40, marginRight: 40 }}>
+            <ListItemText style={{ marginLeft: 26, marginRight: 36 }}>
               <TextField
                 InputProps={{
                   startAdornment: (
@@ -101,7 +101,7 @@ function JobModal({ jobQuery, setJobQuery }, ref) {
           </ListItem>
           {job.data.map(({ id, enabled, search }) => (
             <ListItem disablePadding key={id}>
-              <ListItemIcon>
+              <ListItemIcon className="min-w-0">
                 <Checkbox
                   checked={enabled}
                   disableRipple
@@ -125,9 +125,9 @@ function JobModal({ jobQuery, setJobQuery }, ref) {
                   }}
                 />
               </ListItemText>
-              <ListItemIcon onClick={() => deleteQuery(id)}>
-                <IconButton color="error" size="large">
-                  <Delete fontSize="inherit" />
+              <ListItemIcon className="min-w-0" onClick={() => deleteQuery(id)}>
+                <IconButton color="error" size="large" >
+                  <Cancel fontSize="inherit" />
                 </IconButton>
               </ListItemIcon>
             </ListItem>
@@ -139,11 +139,11 @@ function JobModal({ jobQuery, setJobQuery }, ref) {
           onClick={addQuery}
           variant="contained"
           startIcon={<Add />}
-          color="success"
+          // color="success"
         >
           Add Job
         </Button>
-        <Button variant="contained" startIcon={<Save />} onClick={save}>
+        <Button variant="outlined" startIcon={<Save />} onClick={save}>
           Save
         </Button>
       </DialogActions>
