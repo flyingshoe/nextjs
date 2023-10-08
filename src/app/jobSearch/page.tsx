@@ -4,7 +4,7 @@ import JobCard from "../../components/jobSearch/jobCard";
 import { JobData } from "@/types/jobSearch";
 import { endpoints } from "@/constants/endpoints";
 import JobModalWrapper from "@/components/jobSearch/jobModalWrapper";
-import useUserJobs from "@/hooks/jobSearch/useUserJobs";
+import useUserJobs, { jobLsKey } from "@/hooks/jobSearch/useUserJobs";
 import { useEffect, useState } from "react";
 import JobCardSkeleton from "@/components/jobSearch/jobCardSkeleton";
 import { isToday, parse } from "date-fns";
@@ -75,12 +75,14 @@ export default function JobSearch() {
       // First check if there is a lastSeen post stored in localstorage
       // AND there is the same lastSeen post in the job listing (allData)
       // If so set the box shadow for every post UNTIL the last seen post
+
+      const lastSeen = JSON.parse(window.localStorage[jobLsKey])?.lastSeen // Check local storage instead of jobQuery as setting lastSeen does not trigger setJobQuery in order to prevent refetching
       if (
-        jobQuery.lastSeen &&
-        allData.findIndex((p) => p.uuid === jobQuery.lastSeen) !== -1
+        lastSeen &&
+        allData.findIndex((p) => p.uuid === lastSeen) !== -1
       ) {
         const lastSeenIdx = allData.findIndex(
-          (post) => post.uuid === jobQuery.lastSeen
+          (post) => post.uuid === lastSeen
         );
         allData = allData.map((post, idx) => ({
           ...post,
