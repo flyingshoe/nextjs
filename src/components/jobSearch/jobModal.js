@@ -5,7 +5,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { forwardRef, useImperativeHandle, useState } from "react";
-import { Add, Cancel, Close, Save } from "@mui/icons-material";
+import { Add, Close, Delete, Save } from "@mui/icons-material";
 import {
   Checkbox,
   IconButton,
@@ -73,10 +73,10 @@ function JobModal({ jobQuery, setJobQuery }, ref) {
       >
         <Close />
       </IconButton>
-      <DialogContent className="max-sm:px-1">
+      <DialogContent className="max-sm:px-1.5">
         <List>
           <ListItem>
-            <ListItemText style={{ marginLeft: 26, marginRight: 36 }}>
+            <ListItemText style={{ marginLeft: 34, marginRight: 38 }}>
               <TextField
                 InputProps={{
                   startAdornment: (
@@ -100,7 +100,7 @@ function JobModal({ jobQuery, setJobQuery }, ref) {
             </ListItemText>
           </ListItem>
           {job.data.map(({ id, enabled, search }) => (
-            <ListItem disablePadding key={id}>
+            <ListItem disablePadding key={id} className="gap-2">
               <ListItemIcon className="min-w-0">
                 <Checkbox
                   checked={enabled}
@@ -126,8 +126,8 @@ function JobModal({ jobQuery, setJobQuery }, ref) {
                 />
               </ListItemText>
               <ListItemIcon className="min-w-0" onClick={() => deleteQuery(id)}>
-                <IconButton color="error" size="large" >
-                  <Cancel fontSize="inherit" />
+                <IconButton /* color="error" */ size="large" className="p-2">
+                  <Delete className="text-gray-500" fontSize="inherit" />
                 </IconButton>
               </ListItemIcon>
             </ListItem>
