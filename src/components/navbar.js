@@ -39,8 +39,8 @@ export default function Navbar() {
     <AppBar
       position="sticky"
       style={{
-        backgroundColor: "rgba(255,255,255,0.8)",
-        backdropFilter: "blur(4px)",
+        backgroundColor: "rgba(255,255,255,0.85)",
+        backdropFilter: "blur(5px) saturate(2)",
       }}
     >
       <Container maxWidth="xl">
