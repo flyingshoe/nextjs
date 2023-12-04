@@ -25,23 +25,25 @@ export default function JobSearch() {
     try {
       setLoading(true);
       const allRes = await Promise.allSettled(
-        jobQuery.data.map(({ search }: any) =>
-          fetch(
-            `${MCF_BASE_URL}?limit=${baseParam.limit}&page=${baseParam.page}`,
-            {
-              headers: {
-                "content-type": "application/json",
-              },
-              body: JSON.stringify({
-                ...baseData,
-                search,
-                salary: jobQuery.salary,
-              }),
-              method: "POST",
-              next: { tags: ["jobList"] },
-            }
+        jobQuery.data
+          .filter(({ enabled }: any) => enabled == true)
+          .map(({ search }: any) =>
+            fetch(
+              `${MCF_BASE_URL}?limit=${baseParam.limit}&page=${baseParam.page}`,
+              {
+                headers: {
+                  "content-type": "application/json",
+                },
+                body: JSON.stringify({
+                  ...baseData,
+                  search,
+                  salary: jobQuery.salary,
+                }),
+                method: "POST",
+                next: { tags: ["jobList"] },
+              }
+            )
           )
-        )
       );
 
       let allData: JobData[] = [];
