@@ -13,6 +13,7 @@
     "@ducanh2912/next-pwa": "^9.6.0",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@module-federation/nextjs-mf": "^8.1.7",
     "@mui/icons-material": "^5.10.14",
     "@mui/material": "^5.10.13",
     "@types/node": "20.5.8",
