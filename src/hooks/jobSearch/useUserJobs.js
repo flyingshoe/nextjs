@@ -16,13 +16,41 @@ export default function useUserJobs() {
   });
 
   useEffect(() => {
+    const ls = JSON.parse(window.localStorage.getItem(jobLsKey));
     // Save to Local Storage
-    localStorage.setItem(jobLsKey, JSON.stringify(jobQuery));
+    localStorage.setItem(jobLsKey, JSON.stringify({ ...ls, ...jobQuery }));
   }, [jobQuery]);
 
+  // Directly setting the localstorage instead of indirectly setting it through jobQuery as that will trigger an infinite api loop
   const setLastSeen = (lastSeen) => {
-    localStorage.setItem(jobLsKey, JSON.stringify({ ...jobQuery, lastSeen }));
+    const ls = JSON.parse(window.localStorage.getItem(jobLsKey));
+    localStorage.setItem(jobLsKey, JSON.stringify({ ...ls, lastSeen }));
   };
 
-  return { jobQuery, setJobQuery, baseParam, baseData, setLastSeen };
+  const setSeenToday = (seenToday) => {
+    const ls = JSON.parse(window.localStorage.getItem(jobLsKey));
+    ls.seenToday = { ...ls.seenToday, [seenToday]: true };
+    localStorage.setItem(jobLsKey, JSON.stringify(ls));
+  };
+  const clearSeenToday = () => {
+    const ls = JSON.parse(window.localStorage.getItem(jobLsKey));
+    ls.seenToday = {};
+    localStorage.setItem(jobLsKey, JSON.stringify(ls));
+  };
+
+  const setSeenDate = (seenDate) => {
+    const ls = JSON.parse(window.localStorage.getItem(jobLsKey));
+    localStorage.setItem(jobLsKey, JSON.stringify({ ...ls, seenDate }));
+  };
+  
+  return {
+    jobQuery,
+    setJobQuery,
+    baseParam,
+    baseData,
+    setLastSeen,
+    setSeenToday,
+    setSeenDate,
+    clearSeenToday
+  };
 }

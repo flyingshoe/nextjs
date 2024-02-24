@@ -3,5 +3,6 @@ export type JobData = {
   metadata: any;
   postedCompany: any;
   unix: number;
-  showShadow: boolean;
+  howShadow: boolean;
+  title: string;
 };
