@@ -90,7 +90,8 @@ function JobModal({ jobQuery, setJobQuery }, ref) {
                 value={job.salary}
                 onChange={(e) => {
                   const tempData = { ...job };
-                  tempData.salary = +e.target.value;
+                  tempData.salary =
+                    e.target.value !== "" ? +e.target.value : e.target.value;
                   setJob(tempData);
                 }}
                 onFocus={(event) => {
