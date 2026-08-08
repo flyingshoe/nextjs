@@ -1,11 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import HomeIcon from "@mui/icons-material/Home";
@@ -13,6 +14,7 @@ import Link from "next/link";
 import {
   Divider,
   Drawer,
+  IconButton,
   List,
   ListItem,
   ListItemButton,
@@ -25,6 +27,7 @@ const drawerWidth = 240;
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [colorMode, setColorMode] = useState("light");
 
   const router = useRouter();
 
@@ -32,14 +35,49 @@ export default function Navbar() {
     setMobileOpen(!mobileOpen);
   };
 
+  const applyTheme = (themeMode) => {
+    if (typeof window === "undefined") return;
+    const root = window.document.documentElement;
+    const isDark = themeMode === "dark";
+    root.classList.toggle("dark", isDark);
+    window.localStorage.setItem("theme", themeMode);
+  };
+
+  const toggleColorMode = () => {
+    setColorMode((prev) => {
+      const nextTheme = prev === "dark" ? "light" : "dark";
+      applyTheme(nextTheme);
+      return nextTheme;
+    });
+  };
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const storedTheme = window.localStorage.getItem("theme");
+    const initialTheme =
+      storedTheme === "light" || storedTheme === "dark"
+        ? storedTheme
+        : window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+    setColorMode(initialTheme);
+    applyTheme(initialTheme);
+  }, []);
+
   const container =
     typeof window !== "undefined" ? window.document.body : undefined;
+
+  const isDarkMode = colorMode === "dark";
+  const appBarBackground = isDarkMode
+    ? "rgba(15, 23, 42, 0.85)"
+    : "rgba(255,255,255,0.85)";
+  const textColor = isDarkMode ? "#f8fafc" : "#555";
 
   return (
     <AppBar
       position="sticky"
       style={{
-        backgroundColor: "rgba(255,255,255,0.85)",
+        backgroundColor: appBarBackground,
         backdropFilter: "blur(5px) saturate(2)",
       }}
     >
@@ -53,7 +91,7 @@ export default function Navbar() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={toggleDrawer}
-              color="#555"
+              sx={{ color: textColor }}
             >
               <MenuIcon />
             </IconButton>
@@ -82,7 +120,7 @@ export default function Navbar() {
                     justifyContent: "center",
                     gap: 1,
                     py: 2,
-                    color: "#555",
+                    color: textColor,
                   }}
                   component={Link}
                   href="/"
@@ -105,7 +143,7 @@ export default function Navbar() {
                       }
                     >
                       <ListItemButton
-                        sx={{ textAlign: "center", color: "#555" }}
+                        sx={{ textAlign: "center", color: textColor }}
                       >
                         <ListItemText primary={item.title} href={item.path} />
                       </ListItemButton>
@@ -127,7 +165,7 @@ export default function Navbar() {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "#555",
+              color: textColor,
               textDecoration: "none",
             }}
           >
@@ -146,7 +184,7 @@ export default function Navbar() {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "#555",
+              color: textColor,
               textDecoration: "none",
             }}
           >
@@ -160,7 +198,7 @@ export default function Navbar() {
                 key={item.title}
                 component={Link}
                 href={item.path}
-                sx={{ my: 2, color: "#555", display: "block" }}
+                sx={{ my: 2, color: textColor, display: "block" }}
                 className={
                   router.pathname === item.path ? "nav-item-active" : "nav-item"
                 }
@@ -169,6 +207,13 @@ export default function Navbar() {
               </Button>
             ))}
           </Box>
+          <IconButton
+            onClick={toggleColorMode}
+            sx={{ color: textColor }}
+            aria-label="Toggle dark mode"
+          >
+            {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+          </IconButton>
         </Toolbar>
       </Container>
     </AppBar>

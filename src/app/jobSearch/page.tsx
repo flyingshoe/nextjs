@@ -221,7 +221,7 @@ export default function JobSearch() {
   };
 
   return (
-    <Box className="grow bg-gray-100">
+    <Box className="grow bg-gray-100 dark:bg-slate-950">
       <Container maxWidth="sm" className="flex flex-col gap-8 p-8">
         <RenderCards />
       </Container>

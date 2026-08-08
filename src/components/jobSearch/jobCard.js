@@ -23,7 +23,7 @@ export default function JobCard({ cardData: data }) {
             <Avatar
               variant="rounded"
               sx={{
-                background: "transparent",
+                background: "#FFF",
                 boxShadow: "0 0 8px lightgrey",
                 height: iconSize,
                 width: iconSize,
