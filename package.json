@@ -10,7 +10,6 @@
     "live": "next build && next start"
   },
   "dependencies": {
-    "@ducanh2912/next-pwa": "^9.6.0",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.10.14",
@@ -23,7 +22,6 @@
     "eslint": "8.48.0",
     "eslint-config-next": "^14.2.5",
     "next": "^14.2.5",
-    "next-pwa": "^5.6.0",
     "postcss": "8.4.29",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
