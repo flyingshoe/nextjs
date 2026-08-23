@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 
 export default function Home() {
   return (
-    <main className="flex flex-col grow items-center justify-between sm:py-20 sm:px-8 py-8 px-4 bg-white text-slate-950 dark:bg-slate-950 dark:text-slate-100">
+    <main className="flex flex-col grow items-center justify-between sm:py-20 sm:px-8 py-8 px-4 bg-white text-slate-950 dark:bg-black dark:text-slate-100">
       {navItems.map(({ title, path, desc }) => (
         <Card
           key={path}
