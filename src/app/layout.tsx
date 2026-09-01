@@ -14,8 +14,25 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: NextLayout) {
   return (
     <html lang="en">
-      <meta name="theme-color" content="#FFF" />
-      <link rel="manifest" href="/manifest.json" />
+      <head>
+        <meta name="theme-color" content="#FFF" />
+        <link rel="manifest" href="/manifest.json" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const theme = localStorage.getItem('theme') || 
+                    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                  if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       {/* <body  className={selectedFont.className} > */}
       <body className="flex flex-col min-h-screen">
         <Navbar />

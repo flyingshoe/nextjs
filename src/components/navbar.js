@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -51,17 +51,11 @@ export default function Navbar() {
     });
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (typeof window === "undefined") return;
-    const storedTheme = window.localStorage.getItem("theme");
-    const initialTheme =
-      storedTheme === "light" || storedTheme === "dark"
-        ? storedTheme
-        : window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light";
-    setColorMode(initialTheme);
-    applyTheme(initialTheme);
+    // The head script already applied the theme, just sync the state
+    const isDarkApplied = window.document.documentElement.classList.contains("dark");
+    setColorMode(isDarkApplied ? "dark" : "light");
   }, []);
 
   const container =
