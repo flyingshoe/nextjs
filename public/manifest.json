@@ -1,5 +1,4 @@
 {
-  "background_color": "#000000",
   "display": "standalone",
   "icons": [
     {
@@ -25,5 +24,6 @@
   "orientation": "portrait",
   "short_name": "Find Job!",
   "start_url": "/jobSearch",
-  "theme_color": "#000000"
+  "theme_color": "blue",
+  "background_color": "green"
 }
