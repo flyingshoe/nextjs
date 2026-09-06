@@ -24,6 +24,6 @@
   "orientation": "portrait",
   "short_name": "Find Job!",
   "start_url": "/jobSearch",
-  "theme_color": "blue",
-  "background_color": "green"
+  "theme_color": "#FF0000",
+  "background_color": "#00FF00"
 }
